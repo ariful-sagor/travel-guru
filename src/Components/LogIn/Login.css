@@ -1,0 +1,58 @@
+
+
+#login{
+    width:40%;
+    height: 40%;
+    padding:30px;
+    margin: 50px auto;
+    align-items:center;
+    justify-content:center;
+    border:1px solid black;
+    font-weight: bold;
+    border-radius:10px;
+    
+}
+.highlight{
+    filter: brightness(900%);
+}
+placeholder{
+    color:black;
+}
+#login Button{
+    width:80%;
+    margin: 10px 40px;
+
+}
+
+.fb img, .google img{
+    width:10%;
+    height: 10%;
+    align-items: left;
+    margin-right: 70px;
+}
+.google{
+    border: 1px solid black;
+    text-align: center;
+    display:flex;
+    flex-direction:row;
+    width:30%;
+    height:30%;
+    border-radius: 25px;
+    padding: 5px 5px;
+    margin:5px auto; 
+    align-items: center;
+
+}
+.fb{
+    border: 1px solid black;
+    text-align: center;
+    display:flex;
+    flex-direction:row;
+    width:30%;
+    height:30%;
+    border-radius: 25px;
+    padding: 5px 5px;
+    margin:5px auto; 
+    align-items: center;
+
+}
