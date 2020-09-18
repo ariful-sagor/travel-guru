@@ -1,0 +1,13 @@
+.hotelImage img{
+    width: 30vh;
+    height: 20vh;
+    margin: 15px;
+}
+.highlight{
+    filter: brightness(600%);
+
+}
+#star{
+    width:20px;
+    height: 20px;
+}

@@ -11,16 +11,21 @@ import firebaseConfig from './firebase.config';
 import {UserContext} from '../../App'
 import { useHistory, useLocation } from 'react-router-dom';
 
+
 firebase.initializeApp(firebaseConfig);
 
 const Login = () => {
+    
+    const location= useLocation();
+    const history = useHistory();
+
+    let {from}= location.state || { from: {pathname:"/hotel"}};
 
     let isFormValid = true;
 
     const handleBlur=(event) => {
         if (event.target.name === 'email'){
-            isFormValid = /\S+@\S+\.\S+/.test(event.target.value);
-                    
+            isFormValid = /\S+@\S+\.\S+/.test(event.target.value);          
         }
         if(event.target.name === 'password'){
             isFormValid= event.target.value.length>5;
@@ -30,9 +35,7 @@ const Login = () => {
             newUserInfo[event.target.name]= event.target.value;
             setUser(newUserInfo);
         }
-        console.log(user)
     }
-    // const [newUser, setNewUser]= useState(false);
     
 
     const [user, setUser]= useState({
@@ -41,23 +44,31 @@ const Login = () => {
         email: '',
         password: '',
     });
+    const [loggedInUser, setLoggedInUser]= useContext(UserContext);
     
-    
+
+
 
     const handleSubmit=(e)=>{
         if(user.email && user.password){
             firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+            .then(res=>{
+                const newUserInfo={...user};
+                newUserInfo.error= '';
+                setUser(newUserInfo);
+                setLoggedInUser(newUserInfo);
+                history.replace(from);
+            })
             .catch(function(error) {
                 const newUserInfo={...user};
                 newUserInfo.error= error.message;
-                setUser(newUserInfo);;
+                setUser(newUserInfo);
+                
               });
-
         }
         e.preventDefault();
-        console.log(user);
     }
-    
+
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     const handleGoogleLogin = () => {
         firebase.auth().signInWithPopup(googleProvider)
@@ -69,12 +80,15 @@ const Login = () => {
                 email: email,
             }
             setUser(signedInUser);
+            setLoggedInUser(signedInUser);
+            history.replace(from);
         }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
           });
+
     }
     const fbProvider = new firebase.auth.FacebookAuthProvider();
     const handleFbLogin = () => {
@@ -87,12 +101,14 @@ const Login = () => {
                 email: email,
             }
             setUser(signedInUser);
+            setLoggedInUser(signedInUser);
+            history.replace(from);
           }).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
             var email = error.email;
             var credential = error.credential;
-            // ...
+
           });
     }
 
@@ -102,12 +118,9 @@ const Login = () => {
         <div id="page">
             
         <div id="login">
-            <Form onSubmit={handleSubmit}>
+            <Form >
                 <h3 className="highlight">Login</h3>
                 <br />
-                {/* {newUser && <Form.Group >
-                        <Form.Control type="text" name='firstName' onBlur={handleBlur} placeholder="First name" />
-                    </Form.Group>} */}
                 <Form.Group controlId="formBasicEmail">
                     
                     <Form.Control name="email" onBlur={handleBlur} type="email" placeholder="Username or Email" />
@@ -128,14 +141,13 @@ const Login = () => {
                     </Col>
 
                 </Row>
-                <Button variant="warning" type="submit" >
+                <Button variant="warning" type="submit" onClick={handleSubmit}>
                     <h5>Login</h5>
                 </Button>
                 <p  className="highlight" >Don't have an account? <a name='newUser' href="/signup" >Create an account</a></p>
                 </Form>
                 
             </div>
-            <h3 className="highlight">{user.error}</h3>
             <h3 className="highlight">{user.error}</h3>
 
             <div id="anotherProcess">

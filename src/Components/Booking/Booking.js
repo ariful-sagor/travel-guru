@@ -10,7 +10,7 @@ const Booking = () => {
     const booking = fakeData.find(place => place.name === placename);
     const history = useHistory();
     const handleProceed=() =>{
-        history.push('/shipment');
+        history.push('/hotel');
     }
     return (
         <section className="booking text-white">

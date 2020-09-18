@@ -7,26 +7,35 @@ import NotFound from './Components/NotFound/NotFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Components/LogIn/Login';
 import Signup from './Components/Signup/Signup';
-import Shipment from './Components/Shipment/Shipment';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Hotel from './Components/Hotel/Hotel';
+import GoogleMap from './Components/Map/GoogleMap';
 
 
 
 export const UserContext= createContext();
+
 function App() {
-  const [loggedInUser, setLoggedInUser]= useState({})
+
+  const [loggedInUser, setLoggedInUser]= useState({});
+  
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    {/* <h3 className="highlight">Email: {loggedInUser.email}</h3> */}
+
     <Router>
       <Switch>
+        <Route path="/map">
+          <GoogleMap />
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
         <Route path="/signup">
           <Signup />
         </Route>
-        <PrivateRoute path="/shipment">
-          <Shipment></Shipment>
+        <PrivateRoute path="/hotel">
+          <Hotel />
         </PrivateRoute>
         <Route path="/home">
           <Home />
@@ -34,7 +43,6 @@ function App() {
         <Route path="/booking/:placename">
           <Book />
         </Route>
-        
         <Route exact path="/">
           <Home />
         </Route>
