@@ -12,7 +12,6 @@ const Booking = () => {
     const handleProceed=() =>{
         history.push('/shipment');
     }
-
     return (
         <section className="booking text-white">
         <NavBar />
@@ -44,7 +43,6 @@ const Booking = () => {
                                     <input required className="form-control" type="date" id="dateTo" />
                                 </div>
                             </div>
-                           
                             <button type="submit" className="btn btn-warning btn-block" onClick={handleProceed}>Submit</button>
                         </form>
                     </Col>
