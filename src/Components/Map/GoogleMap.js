@@ -19,5 +19,5 @@ render() {
       
   };
   export default GoogleApiWrapper({
-      apiKey: ('AIzaSyCt-J-uxPO6TxkfmSU54klQx6D7GNNEE7w')
+      apiKey: ('AIzaSyAcMDM18zHVcfZE760W2QipyVhsOf5sV1o')
     })(GoogleMap)
