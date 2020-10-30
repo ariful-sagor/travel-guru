@@ -4,6 +4,7 @@ Features:
 - Select Destination
 - Booking for jurney
 - Select jurney date
+- See Available Hotel rooms
 - Watch Location in map
 
 Used tools:
