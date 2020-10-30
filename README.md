@@ -2,7 +2,8 @@ A react app where you can pick place and book for travel. One can see available 
 
 Features:
 - Select Destination
-- Bokking for jurney
+- Booking for jurney
+- Select jurney date
 - Watch Location in map
 
 Used tools:
